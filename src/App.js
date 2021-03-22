@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Form from "./components/Form";
+import PhotoGallery from "./components/PhotoGallery";
+import axios from "axios";
 
-function App() {
+const App = () => {
+  const [photos, setPhotos] = useState([]);
+  const [inputValue, setInputValue] = useState(1);
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.get(
+        `http://localhost:5000/shibe-photos/${inputValue}`
+      );
+      setPhotos(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Form
+        submitHandler={submitHandler}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+      />
+      <PhotoGallery photos={photos} setPhotos={setPhotos} />
+    </>
   );
-}
+};
 
 export default App;
