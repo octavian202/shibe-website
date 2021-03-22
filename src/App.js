@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Form from "./components/Form";
 import PhotoGallery from "./components/PhotoGallery";
 import axios from "axios";
+const API_URL = "https://shibe-photos.herokuapp.com/shibe-photos";
 
 const App = () => {
   const [photos, setPhotos] = useState([]);
@@ -10,9 +11,7 @@ const App = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.get(
-        `http://localhost:5000/shibe-photos/${inputValue}`
-      );
+      const { data } = await axios.get(`${API_URL}/${inputValue}`);
       setPhotos(data);
     } catch (err) {
       console.log(err);
