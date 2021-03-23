@@ -57,6 +57,9 @@
   padding: 2em;
   border-radius: 20px;
   display: grid;
+  width: auto;
+  place-items: center;
+  margin: 0 auto;
   grid-gap: 1em 1em;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
@@ -65,4 +68,16 @@
   height: 300px;
   width: 300px;
   object-fit: cover;
+}
+
+@media (max-width: 700px) {
+  .photoGallery {
+    padding: 2em 0;
+  }
+
+  .photo {
+    width: 90%;
+    height: auto;
+    overflow: hidden;
+  }
 }
